@@ -11,6 +11,10 @@ class PagesController < ApplicationController
     @page = Page.new
   end
 
+  def edit
+    @page = Page.find(params[:id])
+  end
+
   def create
     @page = Page.new(page_params)
 
@@ -19,6 +23,14 @@ class PagesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def update
+    @page = Page.find(params[:id])
+    if @page.update(pages_params)
+      redirect_to pages_path(@page)
+    else
+      render :edit
   end
 
   private
